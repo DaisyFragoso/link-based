@@ -1,0 +1,87 @@
+{
+    "Title": "Ocean",
+    "Credits": "Created by Adam Smith (amsmith@ucsc.edu). Edited by Daisy Fragoso",
+    "InitialLocation": "Natural Bridges State Beach",
+    "Locations": {
+        "Natural Bridges State Beach": {
+            "Body": "Natural Bridges State Beach: You are at the beach. The waves are calm and there are rocks nearby.",
+            "Choices": [
+                {
+                    "Text": "South",
+                    "Target": "West Cliff Drive"
+                }
+            ]
+        },
+        "West Cliff Drive": {
+            "Body": "West Cliff Drive: The view is nice.",
+            "Choices": [
+                {
+                    "Text": "North",
+                    "Target": "Natural Bridges State Beach"
+                },
+                {
+                    "Text": "South",
+                    "Target": "Santa Cruz Surfing Museum"
+                }
+            ]
+        },
+        "Santa Cruz Surfing Museum": {
+            "Body": "Santa Cruz Surfing Museum: You see an old lighthouse with surfboards inside.",
+            "Choices": [
+                {
+                    "Text": "North",
+                    "Target": "West Cliff Drive"
+                },
+                {
+                    "Text": "South",
+                    "Target": "Santa Cruz Beach Boardwalk"
+                }
+            ]
+        },
+        "Santa Cruz Beach Boardwalk": {
+            "Body": "Santa Cruz Beach Boardwalk: There are games, food stands, and people having fun at the boardwalk.",
+            "Choices": [
+                {
+                    "Text": "North",
+                    "Target": "Santa Cruz Surfing Museum"
+                },
+                {
+                    "Text": "South",
+                    "Target": "Santa Cruz Wharf"
+                }
+            ]
+        },
+        "Santa Cruz Wharf": {
+            "Body": "Santa Cruz Wharf: You are on the pier. You see a shimmering key on the ground",
+            "Choices": [
+                {
+                    "Text": "Take the key",
+                    "Target": "Santa Cruz Wharf",
+                    "TakesItem": "OceanKey"
+                },
+                {
+                    "Text": "North",
+                    "Target": "Santa Cruz Beach Boardwalk"
+                },
+                {
+                    "Text": "South",
+                    "Target": "Beyond"
+                }
+            ]
+        },
+        "Beyond": {
+            "Body": "You are in an open field. The grass is tall and it's very quiet.",
+            "Choices": [
+                {
+                    "Text": "Enter secret cave",
+                    "Target": "Secret Cave",
+                    "Requires": "OceanKey"
+                }
+            ]
+        },
+        "Secret Cave": {
+            "Body": "You've entered the hidden cave. It's glowing with magical light"
+
+        }
+    }
+}

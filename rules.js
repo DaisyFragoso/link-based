@@ -9,31 +9,6 @@ class Start extends Scene {
     }
 }
 
-// class Location extends Scene {
-//     create(key) {
-//         let locationData = key; // TODO: use `key` to get the data object for the current story location
-//         this.engine.show(this.engine.storyData.Locations[locationData].Body); // TODO: replace this text by the Body of the location data
-//         if(this.engine.storyData.Locations[locationData].Choices) { // TODO: check if the location has any Choices
-//             for(let choice of this.engine.storyData.Locations[locationData].Choices) { // TODO: loop over the location's Choices
-//                 console.log(choice.Text);
-//                 this.engine.addChoice(choice.Text, choice); // TODO: use the Text of the choice
-//                 // TODO: add a useful second argument to addChoice so that the current code of handleChoice below works
-//             }
-//         } else {
-//             this.engine.addChoice("The end.")
-//         }
-//     }
-
-//     handleChoice(choice) {
-//         if(choice) {
-//             this.engine.show("&gt; "+choice.Text);
-//             this.engine.gotoScene(Location, choice.Target);
-//         } else {
-//             this.engine.gotoScene(End);
-//         }
-//     }
-// }
-
 class Location extends Scene {
     create(locationKey) {
         this.locationKey = locationKey;
@@ -52,10 +27,10 @@ class Location extends Scene {
             }
         }
 
-        // 🧭 Add choices (check if player has required item, if any)
+        //  Add choices (check if player has required item, if any)
         if (location.Choices) {
             for (let choice of location.Choices) {
-                const required = choice.RequiresItem;
+                const required = choice.Requires;
                 if (!required || this.engine.inventory.has(required)) {
                     this.engine.addChoice(choice.Text, choice);
                 }
@@ -66,13 +41,19 @@ class Location extends Scene {
     }
 
     handleChoice(choice) {
-        if (choice) {
-            this.engine.show("&gt; " + choice.Text);
-            this.engine.gotoScene(Location, choice.Target);
-        } else {
-            this.engine.gotoScene(End);
+    if (choice) {
+        // Check if the choice gives the player an item
+        if (choice.TakesItem && !this.engine.inventory.has(choice.TakesItem)) {
+            this.engine.inventory.add(choice.TakesItem);
+            this.engine.show(`<em>You picked up: ${choice.TakesItem}</em>`);
         }
+
+        this.engine.show("&gt; " + choice.Text);
+        this.engine.gotoScene(Location, choice.Target);
+    } else {
+        this.engine.gotoScene(End);
     }
+}
 }
 
 
